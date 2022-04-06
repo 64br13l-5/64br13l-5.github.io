@@ -34,6 +34,8 @@ class Termynal {
             || parseFloat(this.container.getAttribute(`${this.pfx}-startDelay`)) || 600;
         this.typeDelay = options.typeDelay
             || parseFloat(this.container.getAttribute(`${this.pfx}-typeDelay`)) || 90;
+            this.link = options.link
+                || parseFloat(this.container.getAttribute(`${this.pfx}-prompt`)) || 90;
         this.lineDelay = options.lineDelay
             || parseFloat(this.container.getAttribute(`${this.pfx}-lineDelay`)) || 1500;
         this.progressLength = options.progressLength
@@ -122,12 +124,12 @@ class Termynal {
     async typel(line) {
         const chars = [...line.textContent];
         const delay = line.getAttribute(`${this.pfx}-typeDelay`) || this.typeDelay;
-
+        const link = line.getAttribute(`${this.pfx}-prompt`) || this.link;
         var a = document.createElement('a');
   line = document.createTextNode("");
  a.appendChild(line);
  a.title = "";
- a.href = "https://discord.gg/ftHyGXXgxZ";
+ a.href = link;
  a.style.color = "#567b9c";
          this.container.appendChild(a);
 
