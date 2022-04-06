@@ -85,7 +85,11 @@ class Termynal {
                 await this.type(line);
                 await this._wait(delay);
             }
-
+            else if (type == 'link') {
+                line.setAttribute(`${this.pfx}-cursor`, this.cursor);
+                await this.typel(line);
+                await this._wait(delay);
+            }
             else if (type == 'progress') {
                 await this.progress(line);
                 await this._wait(delay);
@@ -115,7 +119,23 @@ class Termynal {
             line.textContent += char;
         }
     }
+    async typel(line) {
+        const chars = [...line.textContent];
+        const delay = line.getAttribute(`${this.pfx}-typeDelay`) || this.typeDelay;
 
+        var a = document.createElement('a');
+  line = document.createTextNode("");
+ a.appendChild(line);
+ a.title = "";
+ a.href = "https://discord.gg/ftHyGXXgxZ";
+ a.style.color = "#567b9c";
+         this.container.appendChild(a);
+
+        for (let char of chars) {
+            await this._wait(delay);
+            line.textContent += char;
+        }
+    }
     /**
      * Animate a progress bar.
      * @param {Node} line - The line element to render.
